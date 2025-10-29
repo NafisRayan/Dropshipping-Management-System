@@ -1,22 +1,29 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Supplier } from '../entities/supplier.entity';
-import { CreateSupplierDto } from './dto/create-supplier.dto';
+import { Supplier } from './supplier.entity';
+import { CreateSupplierDto, UpdateSupplierDto } from './dto/supplier.dto';
 
 @Injectable()
 export class SuppliersService {
   constructor(
     @InjectRepository(Supplier)
-    private supplierRepository: Repository<Supplier>,
+    private suppliersRepository: Repository<Supplier>,
   ) {}
 
+  async create(createSupplierDto: CreateSupplierDto): Promise<Supplier> {
+    const supplier = this.suppliersRepository.create(createSupplierDto);
+    return this.suppliersRepository.save(supplier);
+  }
+
   async findAll(): Promise<Supplier[]> {
-    return this.supplierRepository.find({ relations: ['products'] });
+    return this.suppliersRepository.find({
+      relations: ['products'],
+    });
   }
 
   async findOne(id: number): Promise<Supplier> {
-    const supplier = await this.supplierRepository.findOne({
+    const supplier = await this.suppliersRepository.findOne({
       where: { id },
       relations: ['products'],
     });
@@ -26,19 +33,15 @@ export class SuppliersService {
     return supplier;
   }
 
-  async create(createSupplierDto: CreateSupplierDto): Promise<Supplier> {
-    const supplier = this.supplierRepository.create(createSupplierDto);
-    return this.supplierRepository.save(supplier);
-  }
-
-  async update(id: number, updateSupplierDto: Partial<CreateSupplierDto>): Promise<Supplier> {
-    const supplier = await this.findOne(id);
-    Object.assign(supplier, updateSupplierDto);
-    return this.supplierRepository.save(supplier);
+  async update(id: number, updateSupplierDto: UpdateSupplierDto): Promise<Supplier> {
+    await this.suppliersRepository.update(id, updateSupplierDto);
+    return this.findOne(id);
   }
 
   async remove(id: number): Promise<void> {
-    const supplier = await this.findOne(id);
-    await this.supplierRepository.remove(supplier);
+    const result = await this.suppliersRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Supplier with ID ${id} not found`);
+    }
   }
 }

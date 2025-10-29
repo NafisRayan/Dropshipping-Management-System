@@ -1,32 +1,42 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { SuppliersService } from './suppliers.service';
-import { CreateSupplierDto } from './dto/create-supplier.dto';
+import { CreateSupplierDto, UpdateSupplierDto } from './dto/supplier.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
+@ApiTags('suppliers')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('suppliers')
 export class SuppliersController {
   constructor(private readonly suppliersService: SuppliersService) {}
 
+  @Post()
+  @ApiOperation({ summary: 'Create supplier' })
+  create(@Body() createSupplierDto: CreateSupplierDto) {
+    return this.suppliersService.create(createSupplierDto);
+  }
+
   @Get()
+  @ApiOperation({ summary: 'Get all suppliers' })
   findAll() {
     return this.suppliersService.findAll();
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get supplier by ID' })
   findOne(@Param('id') id: string) {
     return this.suppliersService.findOne(+id);
   }
 
-  @Post()
-  create(@Body() createSupplierDto: CreateSupplierDto) {
-    return this.suppliersService.create(createSupplierDto);
-  }
-
-  @Put(':id')
-  update(@Param('id') id: string, @Body() updateSupplierDto: Partial<CreateSupplierDto>) {
+  @Patch(':id')
+  @ApiOperation({ summary: 'Update supplier' })
+  update(@Param('id') id: string, @Body() updateSupplierDto: UpdateSupplierDto) {
     return this.suppliersService.update(+id, updateSupplierDto);
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete supplier' })
   remove(@Param('id') id: string) {
     return this.suppliersService.remove(+id);
   }
