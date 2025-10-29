@@ -1,0 +1,5 @@
+Hi
+
+Prompt Im using:
+
+Build a fullstack enterprise-grade dropshipping management system using NestJS for the backend with RESTful APIs, TypeORM for database modeling, and SQLite as the development database. The frontend should be built using Next.js with ShadCN UI components for a modern, responsive interface. Implement core modules including user and role management with JWT-based authentication, product management with CRUD operations and supplier API integration, order management with status tracking and auto-forwarding, inventory synchronization via scheduled jobs, shipping and fulfillment tracking, customer management with order history, and reporting dashboards for analytics. The backend should use NestJS modules, DTOs, guards, and validation with class-validator, while the frontend should consume the REST API using Axios and include pages for dashboard, products, orders, customers, and authentication. Bonus features may include PDF invoice generation, email notifications, multi-store support, and webhook integration for real-time updates.
