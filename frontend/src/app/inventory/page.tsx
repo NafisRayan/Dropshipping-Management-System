@@ -6,13 +6,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 interface Product {
   id: number;
   name: string;
-  description: string;
-  price: number;
   stock: number;
   supplier: { name: string };
 }
 
-export default function ProductsPage() {
+export default function InventoryPage() {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -23,13 +21,11 @@ export default function ProductsPage() {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold mb-8">Products</h1>
+      <h1 className="text-3xl font-bold mb-8">Inventory</h1>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Description</TableHead>
-            <TableHead>Price</TableHead>
+            <TableHead>Product Name</TableHead>
             <TableHead>Stock</TableHead>
             <TableHead>Supplier</TableHead>
           </TableRow>
@@ -38,8 +34,6 @@ export default function ProductsPage() {
           {products.map(p => (
             <TableRow key={p.id}>
               <TableCell>{p.name}</TableCell>
-              <TableCell>{p.description}</TableCell>
-              <TableCell>${p.price}</TableCell>
               <TableCell>{p.stock}</TableCell>
               <TableCell>{p.supplier.name}</TableCell>
             </TableRow>

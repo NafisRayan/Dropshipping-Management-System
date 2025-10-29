@@ -1,12 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService) {}
+  constructor(private readonly productsService: ProductsService) {}
 
   @Get()
   findAll() {
@@ -17,21 +15,24 @@ export class ProductsController {
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(+id);
   }
+
   @Post()
-  @UseGuards(JwtAuthGuard)
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard)
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+  update(@Param('id') id: string, @Body() updateProductDto: Partial<CreateProductDto>) {
     return this.productsService.update(+id, updateProductDto);
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.productsService.remove(+id);
+  }
+
+  @Put(':id/stock')
+  updateStock(@Param('id') id: string, @Body() { stock }: { stock: number }) {
+    return this.productsService.updateStock(+id, stock);
   }
 }

@@ -1,11 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-
-export enum OrderStatus {
-  PENDING = 'pending',
-  SHIPPED = 'shipped',
-  DELIVERED = 'delivered',
-  CANCELLED = 'cancelled',
-}
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Product } from './product.entity';
 
 @Entity()
 export class Order {
@@ -13,21 +7,17 @@ export class Order {
   id: number;
 
   @Column()
-  customerId: string;
+  customerName: string;
 
   @Column()
-  productId: number;
+  customerEmail: string;
 
   @Column()
   quantity: number;
 
-  @Column({
-    type: 'simple-enum',
-    enum: OrderStatus,
-    default: OrderStatus.PENDING,
-  })
-  status: OrderStatus;
+  @Column()
+  status: string;
 
-  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  @ManyToOne(() => Product)
+  product: Product;
 }

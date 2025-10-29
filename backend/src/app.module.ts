@@ -1,24 +1,32 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { User } from './entities/user.entity';
+import { Supplier } from './entities/supplier.entity';
 import { Product } from './entities/product.entity';
 import { Order } from './entities/order.entity';
 import { ProductsModule } from './products/products.module';
+import { SuppliersModule } from './suppliers/suppliers.module';
 import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'database.sqlite',
-      synchronize: true,
-      entities: [User, Product, Order],
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
-    AuthModule,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        type: 'sqlite',
+        database: configService.get<string>('DATABASE_URL', 'sqlite:./database.sqlite').replace('sqlite:', ''),
+        entities: [Supplier, Product, Order],
+        synchronize: true, // For development; disable in production
+      }),
+      inject: [ConfigService],
+    }),
     ProductsModule,
+    SuppliersModule,
     OrdersModule,
   ],
   controllers: [AppController],
