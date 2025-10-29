@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { OrderStatus } from '../entities/order.entity';
 
 @Controller('orders')
 export class OrdersController {
@@ -22,7 +23,7 @@ export class OrdersController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateOrderDto: Partial<CreateOrderDto & { status: string }>) {
+  update(@Param('id') id: string, @Body() updateOrderDto: Partial<CreateOrderDto & { status: OrderStatus; trackingNumber?: string }>) {
     return this.ordersService.update(+id, updateOrderDto);
   }
 

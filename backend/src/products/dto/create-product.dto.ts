@@ -1,4 +1,6 @@
-import { IsString, IsNumber, IsNotEmpty } from 'class-validator';
+import { IsString, IsNumber, IsNotEmpty, IsOptional, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { CreateProductVariantDto } from './create-product-variant.dto';
 
 export class CreateProductDto {
   @IsString()
@@ -16,4 +18,14 @@ export class CreateProductDto {
 
   @IsNumber()
   supplierId: number;
+
+  @IsOptional()
+  @IsNumber()
+  categoryId?: number;
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateProductVariantDto)
+  variants?: CreateProductVariantDto[];
 }

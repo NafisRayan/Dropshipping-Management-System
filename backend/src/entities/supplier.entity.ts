@@ -15,6 +15,12 @@ export class Supplier {
   @Column()
   email: string;
 
+  @Column({ nullable: true })
+  apiUrl: string;
+
+  @Column({ nullable: true })
+  apiKey: string;
+
   @OneToMany(() => Product, product => product.supplier)
   products: Product[];
 }
