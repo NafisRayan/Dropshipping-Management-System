@@ -40,12 +40,12 @@ npm install
 
 2. Install backend dependencies:
 ```bash
-cd backend && npm install
+cd backend; npm install
 ```
 
 3. Install frontend dependencies:
 ```bash
-cd frontend && npm install
+cd frontend; npm install
 ```
 
 ### Development
