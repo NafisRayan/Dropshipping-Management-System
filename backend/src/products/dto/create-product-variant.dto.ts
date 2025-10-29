@@ -1,19 +1,15 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber } from 'class-validator';
 
 export class CreateProductVariantDto {
   @IsString()
-  @IsOptional()
-  size?: string;
+  name: string;
 
   @IsString()
-  @IsOptional()
-  color?: string;
+  value: string;
 
   @IsNumber()
-  @IsOptional()
-  additionalPrice?: number;
+  priceModifier: number;
 
   @IsNumber()
-  @IsOptional()
-  stock?: number;
+  stock: number;
 }

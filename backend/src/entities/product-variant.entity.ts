@@ -13,14 +13,14 @@ export class ProductVariant {
   @JoinColumn({ name: 'productId' })
   product: Product;
 
-  @Column({ nullable: true })
-  size: string;
+  @Column()
+  name: string;
 
-  @Column({ nullable: true })
-  color: string;
+  @Column()
+  value: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })
-  additionalPrice: number;
+  priceModifier: number;
 
   @Column({ default: 0 })
   stock: number;

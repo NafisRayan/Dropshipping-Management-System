@@ -8,6 +8,7 @@ import { CustomersService } from './customers/customers.service';
 import { OrdersService } from './orders/orders.service';
 import { UserRole } from './entities/user.entity';
 import { OrderStatus } from './entities/order.entity';
+import { Customer } from './entities/customer.entity';
 
 async function seed() {
   const app = await NestFactory.createApplicationContext(AppModule);
@@ -127,13 +128,13 @@ async function seed() {
     supplierId: supplier1.id,
     categoryId: electronics.id,
     variants: [
-      { name: 'Storage', value: '128GB', priceModifier: 0 },
-      { name: 'Storage', value: '256GB', priceModifier: 100 },
-      { name: 'Storage', value: '512GB', priceModifier: 300 },
-      { name: 'Color', value: 'Natural Titanium', priceModifier: 0 },
-      { name: 'Color', value: 'Blue Titanium', priceModifier: 0 },
-      { name: 'Color', value: 'White Titanium', priceModifier: 0 },
-      { name: 'Color', value: 'Black Titanium', priceModifier: 0 },
+      { name: 'Storage', value: '128GB', priceModifier: 0, stock: 10 },
+      { name: 'Storage', value: '256GB', priceModifier: 100, stock: 10 },
+      { name: 'Storage', value: '512GB', priceModifier: 300, stock: 10 },
+      { name: 'Color', value: 'Natural Titanium', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Blue Titanium', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'White Titanium', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Black Titanium', priceModifier: 0, stock: 10 },
     ],
   });
 
@@ -145,12 +146,12 @@ async function seed() {
     supplierId: supplier1.id,
     categoryId: electronics.id,
     variants: [
-      { name: 'Storage', value: '512GB', priceModifier: 0 },
-      { name: 'Storage', value: '1TB', priceModifier: 200 },
-      { name: 'Storage', value: '2TB', priceModifier: 600 },
-      { name: 'Memory', value: '16GB', priceModifier: 0 },
-      { name: 'Memory', value: '32GB', priceModifier: 400 },
-      { name: 'Memory', value: '64GB', priceModifier: 1000 },
+      { name: 'Storage', value: '512GB', priceModifier: 0, stock: 10 },
+      { name: 'Storage', value: '1TB', priceModifier: 200, stock: 10 },
+      { name: 'Storage', value: '2TB', priceModifier: 600, stock: 10 },
+      { name: 'Memory', value: '16GB', priceModifier: 0, stock: 10 },
+      { name: 'Memory', value: '32GB', priceModifier: 400, stock: 10 },
+      { name: 'Memory', value: '64GB', priceModifier: 1000, stock: 10 },
     ],
   });
 
@@ -171,12 +172,12 @@ async function seed() {
     supplierId: supplier1.id,
     categoryId: electronics.id,
     variants: [
-      { name: 'Storage', value: '64GB', priceModifier: 0 },
-      { name: 'Storage', value: '256GB', priceModifier: 150 },
-      { name: 'Color', value: 'Space Gray', priceModifier: 0 },
-      { name: 'Color', value: 'Silver', priceModifier: 0 },
-      { name: 'Color', value: 'Purple', priceModifier: 0 },
-      { name: 'Color', value: 'Starlight', priceModifier: 0 },
+      { name: 'Storage', value: '64GB', priceModifier: 0, stock: 10 },
+      { name: 'Storage', value: '256GB', priceModifier: 150, stock: 10 },
+      { name: 'Color', value: 'Space Gray', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Silver', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Purple', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Starlight', priceModifier: 0, stock: 10 },
     ],
   });
 
@@ -189,15 +190,15 @@ async function seed() {
     supplierId: supplier2.id,
     categoryId: clothing.id,
     variants: [
-      { name: 'Size', value: '7', priceModifier: 0 },
-      { name: 'Size', value: '8', priceModifier: 0 },
-      { name: 'Size', value: '9', priceModifier: 0 },
-      { name: 'Size', value: '10', priceModifier: 0 },
-      { name: 'Size', value: '11', priceModifier: 0 },
-      { name: 'Size', value: '12', priceModifier: 0 },
-      { name: 'Color', value: 'Black', priceModifier: 0 },
-      { name: 'Color', value: 'White', priceModifier: 0 },
-      { name: 'Color', value: 'Red', priceModifier: 0 },
+      { name: 'Size', value: '7', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '8', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '9', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '10', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '11', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '12', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Black', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'White', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Red', priceModifier: 0, stock: 10 },
     ],
   });
 
@@ -209,16 +210,16 @@ async function seed() {
     supplierId: supplier2.id,
     categoryId: clothing.id,
     variants: [
-      { name: 'Size', value: '28W x 30L', priceModifier: 0 },
-      { name: 'Size', value: '29W x 30L', priceModifier: 0 },
-      { name: 'Size', value: '30W x 30L', priceModifier: 0 },
-      { name: 'Size', value: '31W x 30L', priceModifier: 0 },
-      { name: 'Size', value: '32W x 30L', priceModifier: 0 },
-      { name: 'Size', value: '33W x 30L', priceModifier: 0 },
-      { name: 'Size', value: '34W x 30L', priceModifier: 0 },
-      { name: 'Color', value: 'Dark Wash', priceModifier: 0 },
-      { name: 'Color', value: 'Medium Wash', priceModifier: 0 },
-      { name: 'Color', value: 'Light Wash', priceModifier: 0 },
+      { name: 'Size', value: '28W x 30L', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '29W x 30L', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '30W x 30L', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '31W x 30L', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '32W x 30L', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '33W x 30L', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: '34W x 30L', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Dark Wash', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Medium Wash', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Light Wash', priceModifier: 0, stock: 10 },
     ],
   });
 
@@ -230,12 +231,12 @@ async function seed() {
     supplierId: supplier2.id,
     categoryId: clothing.id,
     variants: [
-      { name: 'Size', value: 'S', priceModifier: 0 },
-      { name: 'Size', value: 'M', priceModifier: 0 },
-      { name: 'Size', value: 'L', priceModifier: 0 },
-      { name: 'Size', value: 'XL', priceModifier: 0 },
-      { name: 'Color', value: 'Black', priceModifier: 0 },
-      { name: 'Color', value: 'Navy', priceModifier: 0 },
+      { name: 'Size', value: 'S', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: 'M', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: 'L', priceModifier: 0, stock: 10 },
+      { name: 'Size', value: 'XL', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Black', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Navy', priceModifier: 0, stock: 10 },
     ],
   });
 
@@ -257,9 +258,9 @@ async function seed() {
     supplierId: supplier3.id,
     categoryId: homeGarden.id,
     variants: [
-      { name: 'Color', value: 'Black', priceModifier: 0 },
-      { name: 'Color', value: 'White', priceModifier: 0 },
-      { name: 'Color', value: 'Gray', priceModifier: 0 },
+      { name: 'Color', value: 'Black', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'White', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Gray', priceModifier: 0, stock: 10 },
     ],
   });
 
@@ -281,11 +282,11 @@ async function seed() {
     supplierId: supplier4.id,
     categoryId: sports.id,
     variants: [
-      { name: 'Thickness', value: '4mm', priceModifier: 0 },
-      { name: 'Thickness', value: '6mm', priceModifier: 20 },
-      { name: 'Color', value: 'Black', priceModifier: 0 },
-      { name: 'Color', value: 'Purple', priceModifier: 0 },
-      { name: 'Color', value: 'Blue', priceModifier: 0 },
+      { name: 'Thickness', value: '4mm', priceModifier: 0, stock: 10 },
+      { name: 'Thickness', value: '6mm', priceModifier: 20, stock: 10 },
+      { name: 'Color', value: 'Black', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Purple', priceModifier: 0, stock: 10 },
+      { name: 'Color', value: 'Blue', priceModifier: 0, stock: 10 },
     ],
   });
 
@@ -298,14 +299,14 @@ async function seed() {
     supplierId: supplier1.id,
     categoryId: books.id,
     variants: [
-      { name: 'Storage', value: '8GB', priceModifier: 0 },
-      { name: 'Storage', value: '32GB', priceModifier: 40 },
+      { name: 'Storage', value: '8GB', priceModifier: 0, stock: 10 },
+      { name: 'Storage', value: '32GB', priceModifier: 40, stock: 10 },
     ],
   });
 
   // Create customers
   console.log('👥 Creating customers...');
-  const customers = [];
+  const customers: Customer[] = [];
   const customerData = [
     {
       firstName: 'John',
