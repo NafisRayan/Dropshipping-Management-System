@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import { api } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,7 +14,7 @@ export default function RegisterPage() {
 
   const handleRegister = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/auth/register', { email, password });
+      const res = await api.post('/auth/register', { email, password });
       localStorage.setItem('token', res.data.access_token);
       router.push('/dashboard');
     } catch (error) {
