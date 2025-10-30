@@ -10,6 +10,15 @@ import { CustomersModule } from './customers/customers.module';
 import { ReportsModule } from './reports/reports.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { SeederModule } from './seeder/seeder.module';
+import { User } from './users/user.entity';
+import { Customer } from './customers/customer.entity';
+import { Supplier } from './suppliers/supplier.entity';
+import { Product } from './products/product.entity';
+import { InventoryLog } from './products/inventory-log.entity';
+import { ProductVariant } from './products/product-variant.entity';
+import { Order } from './orders/order.entity';
+import { OrderItem } from './orders/order-item.entity';
+import { Shipment } from './orders/shipment.entity';
 
 @Module({
   imports: [
@@ -19,7 +28,17 @@ import { SeederModule } from './seeder/seeder.module';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'dropshipping.db',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [
+        User,
+        Customer,
+        Supplier,
+        Product,
+        InventoryLog,
+        ProductVariant,
+        Order,
+        OrderItem,
+        Shipment,
+      ],
       synchronize: true,
     }),
     AuthModule,
