@@ -98,10 +98,6 @@ export class NotificationsService {
       this.getPendingOrderAlerts(),
     ]);
 
-    return {
-      lowStockAlerts,
-      pendingOrderAlerts,
-      totalAlerts: lowStockAlerts.length + pendingOrderAlerts.length,
-    };
+    return [...lowStockAlerts, ...pendingOrderAlerts];
   }
 }

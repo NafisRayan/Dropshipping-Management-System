@@ -16,17 +16,22 @@ export class OrdersService {
 
   async create(createOrderDto: CreateOrderDto): Promise<Order> {
     const orderNumber = `ORD-${Date.now()}`;
-    
+
+    // Calculate subtotal from order items
+    const subtotal = createOrderDto.orderItems.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+
     const order = this.ordersRepository.create({
       ...createOrderDto,
       orderNumber,
+      subtotal,
+      totalAmount: subtotal + (createOrderDto.shippingCost || 0) + (createOrderDto.tax || 0),
     });
-    
+
     const savedOrder = await this.ordersRepository.save(order);
 
     // Create order items
     if (createOrderDto.orderItems && createOrderDto.orderItems.length > 0) {
-      const orderItems = createOrderDto.orderItems.map(item => 
+      const orderItems = createOrderDto.orderItems.map(item =>
         this.orderItemsRepository.create({
           ...item,
           orderId: savedOrder.id,

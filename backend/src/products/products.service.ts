@@ -47,7 +47,7 @@ export class ProductsService {
 
   async updateStock(id: number, quantity: number): Promise<Product> {
     const product = await this.findOne(id);
-    product.stock += quantity;
+    product.stock = quantity;
     return this.productsRepository.save(product);
   }
 }

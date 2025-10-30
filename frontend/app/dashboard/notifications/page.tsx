@@ -14,6 +14,12 @@ export default function NotificationsPage() {
   }, []);
 
   const fetchAlerts = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await notificationsAPI.getAlerts();
       setAlerts(response.data);

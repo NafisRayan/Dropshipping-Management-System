@@ -11,7 +11,7 @@ export default function CustomersPage() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -30,6 +30,12 @@ export default function CustomersPage() {
   }, []);
 
   const fetchCustomers = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await customersAPI.getAll();
       setCustomers(response.data);

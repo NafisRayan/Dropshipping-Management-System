@@ -22,6 +22,12 @@ export default function ReportsPage() {
   }, []);
 
   const fetchReports = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const [salesRes, inventoryRes, supplierRes] = await Promise.all([
         reportsAPI.getSales(dateRange.startDate, dateRange.endDate),

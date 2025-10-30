@@ -31,6 +31,18 @@ export class CreateOrderDto {
 
   @ApiProperty({ required: false })
   @IsOptional()
+  @IsNumber()
+  @Min(0)
+  shippingCost?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  tax?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
   @IsString()
   shippingAddress?: string;
 

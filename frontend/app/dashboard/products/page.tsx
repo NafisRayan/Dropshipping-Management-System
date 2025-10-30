@@ -28,6 +28,12 @@ export default function ProductsPage() {
   }, []);
 
   const fetchData = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const [productsRes, suppliersRes] = await Promise.all([
         productsAPI.getAll(),

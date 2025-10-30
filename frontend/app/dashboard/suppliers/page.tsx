@@ -25,6 +25,12 @@ export default function SuppliersPage() {
   }, []);
 
   const fetchSuppliers = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await suppliersAPI.getAll();
       setSuppliers(response.data);

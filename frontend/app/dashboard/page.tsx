@@ -19,6 +19,12 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const fetchStats = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const dashboardRes = await reportsAPI.getDashboard();
         const data = dashboardRes.data;

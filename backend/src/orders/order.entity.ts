@@ -79,6 +79,9 @@ export class Order {
   @Column({ default: false })
   isForwardedToSupplier: boolean;
 
+  @Column({ nullable: true })
+  trackingNumber: string;
+
   @ManyToOne(() => User, user => user.orders, { nullable: true })
   user: User;
 

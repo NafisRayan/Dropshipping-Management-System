@@ -22,6 +22,12 @@ export default function OrdersPage() {
   }, []);
 
   const fetchOrders = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await ordersAPI.getAll();
       setOrders(response.data);
