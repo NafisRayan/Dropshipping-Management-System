@@ -1,0 +1,32 @@
+import { Customer } from '@/modules/customers/entities/customer.entity';
+import { User } from '@/modules/users/entities/user.entity';
+import { OrderStatus } from '@/common/enums/order-status.enum';
+import { OrderItem } from './order-item.entity';
+import { OrderStatusHistory } from './order-status-history.entity';
+export declare class Order {
+    id: string;
+    orderNumber: string;
+    customer: Customer;
+    createdBy: User;
+    subtotal: number;
+    shippingCost: number;
+    taxAmount: number;
+    totalAmount: number;
+    status: OrderStatus;
+    supplierOrderId: string;
+    trackingNumber: string;
+    shippingCarrier: string;
+    notes: string;
+    items: OrderItem[];
+    statusHistory: OrderStatusHistory[];
+    createdAt: Date;
+    updatedAt: Date;
+    generateOrderNumber(): void;
+    get itemCount(): number;
+    get isPending(): boolean;
+    get isProcessing(): boolean;
+    get isShipped(): boolean;
+    get isDelivered(): boolean;
+    get isCancelled(): boolean;
+    get isRefunded(): boolean;
+}
