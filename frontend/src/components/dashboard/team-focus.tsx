@@ -12,12 +12,12 @@ export function TeamFocusCard({ items }: TeamFocusProps) {
   return (
     <Card className="border-border/60 bg-card/70 backdrop-blur">
       <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <CardTitle className="text-lg font-semibold">Team focus</CardTitle>
+            <CardTitle className="text-base font-semibold sm:text-lg">Team focus</CardTitle>
             <CardDescription>Where squads are investing effort this week</CardDescription>
           </div>
-          <Badge variant="outline" className="rounded-full border-primary/30 text-xs text-primary">
+          <Badge variant="outline" className="rounded-full border-primary/30 text-xs text-primary self-start sm:self-auto">
             <BarChart3 className="mr-1 h-3.5 w-3.5" />
             Priority pods
           </Badge>

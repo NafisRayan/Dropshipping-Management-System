@@ -25,12 +25,12 @@ export function RecentActivityCard({ items }: RecentActivityProps) {
   return (
     <Card className="border-border/60 bg-card/70 backdrop-blur">
       <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <CardTitle className="text-lg font-semibold">Ops activity feed</CardTitle>
+            <CardTitle className="text-base font-semibold sm:text-lg">Ops activity feed</CardTitle>
             <CardDescription>Signal-rich feed of automation and human interventions</CardDescription>
           </div>
-          <Badge variant="secondary" className="rounded-full bg-primary/10 text-primary">
+          <Badge variant="secondary" className="rounded-full bg-primary/10 text-primary self-start sm:self-auto">
             <BellRing className="mr-1 h-3.5 w-3.5" />
             Live
           </Badge>

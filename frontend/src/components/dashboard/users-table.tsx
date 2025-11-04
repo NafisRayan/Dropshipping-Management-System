@@ -25,12 +25,12 @@ export function UsersTable({ users }: UsersTableProps) {
   return (
     <Card className="border-border/60 bg-card/70 backdrop-blur">
       <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <CardTitle className="text-lg font-semibold">Directory snapshot</CardTitle>
+            <CardTitle className="text-base font-semibold sm:text-lg">Directory snapshot</CardTitle>
             <CardDescription>Latest accounts synced from the Nest backend</CardDescription>
           </div>
-          <Badge variant="outline" className="rounded-full border-primary/30 text-xs text-primary">
+          <Badge variant="outline" className="rounded-full border-primary/30 text-xs text-primary self-start sm:self-auto">
             <ShieldCheck className="mr-1 h-3.5 w-3.5" /> JWT secured
           </Badge>
         </div>
@@ -41,10 +41,10 @@ export function UsersTable({ users }: UsersTableProps) {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Created</TableHead>
-              <TableHead className="text-right">Updated</TableHead>
+              <TableHead className="hidden sm:table-cell">Role</TableHead>
+              <TableHead className="hidden md:table-cell">Status</TableHead>
+              <TableHead className="hidden lg:table-cell text-right">Created</TableHead>
+              <TableHead className="hidden lg:table-cell text-right">Updated</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -62,20 +62,20 @@ export function UsersTable({ users }: UsersTableProps) {
                     {user.email}
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden sm:table-cell">
                   <Badge className={`rounded-full px-2 py-1 text-xs ${roleVariant[user.role?.toLowerCase() ?? "customer"] ?? roleVariant.customer}`}>
                     {user.role}
                   </Badge>
                 </TableCell>
-                <TableCell>
+                <TableCell className="hidden md:table-cell">
                   <Badge variant={user.isActive ? "secondary" : "outline"} className="rounded-full px-2 py-1 text-xs">
                     {user.isActive ? "Active" : "Inactive"}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right text-sm text-muted-foreground">
+                <TableCell className="hidden lg:table-cell text-right text-sm text-muted-foreground">
                   {new Date(user.createdAt).toLocaleDateString()}
                 </TableCell>
-                <TableCell className="text-right text-sm text-muted-foreground">
+                <TableCell className="hidden lg:table-cell text-right text-sm text-muted-foreground">
                   {new Date(user.updatedAt).toLocaleDateString()}
                 </TableCell>
               </TableRow>

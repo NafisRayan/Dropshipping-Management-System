@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Pie, PieChart, ResponsiveContainer, Cell, Tooltip } from "recharts";
 
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +14,18 @@ type RoleDistributionProps = {
 };
 
 export function RoleDistribution({ stats }: RoleDistributionProps) {
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const updateWidth = () => setWindowWidth(window.innerWidth);
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  const innerRadius = windowWidth < 640 ? 50 : windowWidth < 1024 ? 60 : 70;
+  const outerRadius = windowWidth < 640 ? 75 : windowWidth < 1024 ? 90 : 105;
+
   const data = [
     { name: "Admins", value: stats.adminUsers },
     { name: "Managers", value: stats.managerUsers },
@@ -20,23 +33,23 @@ export function RoleDistribution({ stats }: RoleDistributionProps) {
   ].filter((item) => item.value > 0);
 
   return (
-    <Card className="border-border/60 bg-card/70 backdrop-blur">
+    <Card className="h-full border-border/60 bg-card/70 backdrop-blur">
       <CardHeader className="pb-4">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <CardTitle className="text-lg font-semibold">Role mix</CardTitle>
+            <CardTitle className="text-base font-semibold sm:text-lg">Role mix</CardTitle>
             <CardDescription>Identity split across the user base</CardDescription>
           </div>
-          <Badge variant="secondary" className="rounded-full bg-primary/10 text-xs text-primary">
+          <Badge variant="secondary" className="rounded-full bg-primary/10 text-xs text-primary self-start sm:self-auto">
             {stats.totalUsers.toLocaleString()} users
           </Badge>
         </div>
       </CardHeader>
       <CardContent className="grid gap-6 md:grid-cols-[1fr_200px]">
-        <div className="relative h-64">
+        <div className="relative h-48 sm:h-56 md:h-64">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
-              <Pie data={data} dataKey="value" nameKey="name" innerRadius={70} outerRadius={105} paddingAngle={6}>
+              <Pie data={data} dataKey="value" nameKey="name" innerRadius={innerRadius} outerRadius={outerRadius} paddingAngle={6}>
                 {data.map((entry, index) => (
                   <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
                 ))}
