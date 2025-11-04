@@ -34,24 +34,24 @@ type PerformanceChartProps = {
 
 export function PerformanceChart({ data }: PerformanceChartProps) {
   return (
-    <Card className="p-6">
-      <div className="flex items-center justify-between">
+    <Card className="p-5 sm:p-6 lg:p-7">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h3 className="text-lg font-semibold">Revenue & Orders</h3>
+          <h3 className="text-base font-semibold sm:text-lg">Revenue & Orders</h3>
           <p className="text-sm text-muted-foreground">
             Six month trend including seasonality adjustments
           </p>
         </div>
       </div>
 
-      <Tabs defaultValue="revenue" className="mt-6">
-        <TabsList className="w-fit">
+      <Tabs defaultValue="revenue" className="mt-5 sm:mt-6">
+        <TabsList className="w-full sm:w-auto">
           <TabsTrigger value="revenue">Revenue focus</TabsTrigger>
           <TabsTrigger value="orders">Orders focus</TabsTrigger>
         </TabsList>
 
         <TabsContent value="revenue" className="mt-6">
-          <div className="h-80">
+          <div className="h-60 sm:h-72 lg:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data}>
                 <defs>
@@ -93,7 +93,7 @@ export function PerformanceChart({ data }: PerformanceChartProps) {
         </TabsContent>
 
         <TabsContent value="orders" className="mt-6">
-          <div className="h-80">
+          <div className="h-60 sm:h-72 lg:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data}>
                 <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
@@ -127,8 +127,8 @@ export function PerformanceChart({ data }: PerformanceChartProps) {
         </TabsContent>
       </Tabs>
 
-      <Separator className="my-6" />
-      <div className="grid gap-4 md:grid-cols-3 text-sm text-muted-foreground">
+      <Separator className="my-5 sm:my-6" />
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
         <div>
           Latest revenue is <span className="font-semibold text-foreground">{numberFormatter.format(data.at(-1)?.revenue ?? 0)}</span>
         </div>

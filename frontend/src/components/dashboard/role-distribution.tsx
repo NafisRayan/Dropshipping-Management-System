@@ -48,8 +48,8 @@ export function RoleDistribution({ stats }: RoleDistributionProps) {
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Active</p>
-            <p className="text-2xl font-semibold text-foreground">{stats.activeUsers.toLocaleString()}</p>
+            <p className="text-[10px] uppercase tracking-wide text-muted-foreground sm:text-xs">Active</p>
+            <p className="text-lg font-semibold text-foreground sm:text-xl lg:text-2xl">{stats.activeUsers.toLocaleString()}</p>
           </div>
         </div>
         <div className="space-y-3">

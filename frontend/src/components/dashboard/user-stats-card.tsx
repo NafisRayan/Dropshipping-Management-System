@@ -19,14 +19,14 @@ export function UserStatsCard({ stats }: UserStatsCardProps) {
 
   return (
     <Card className="h-full border-border/60 bg-card/70 backdrop-blur">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-lg font-semibold">Customer base health</CardTitle>
+      <CardHeader className="space-y-2 sm:space-y-1">
+        <CardTitle className="text-base font-semibold sm:text-lg">Customer base health</CardTitle>
         <p className="text-sm text-muted-foreground">
           Breakdown of active relationships and onboarding momentum
         </p>
       </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="grid gap-4 sm:grid-cols-3">
+      <CardContent className="space-y-5 sm:space-y-6">
+        <div className="grid gap-3 sm:grid-cols-3">
           <MetricPill
             label="Total accounts"
             value={stats.totalUsers}
@@ -44,7 +44,7 @@ export function UserStatsCard({ stats }: UserStatsCardProps) {
           />
         </div>
 
-        <div className="space-y-4 text-sm">
+        <div className="space-y-3 text-xs sm:space-y-4 sm:text-sm">
           <RoleProgress label="Managers" value={stats.managerUsers} percentage={managerPercent} />
           <RoleProgress label="Admins" value={stats.adminUsers} percentage={adminPercent} />
           <RoleProgress label="Customers" value={stats.customerUsers} percentage={customerPercent} />
@@ -62,14 +62,14 @@ type MetricPillProps = {
 
 function MetricPill({ label, value, icon }: MetricPillProps) {
   return (
-    <div className="rounded-xl border border-border/50 bg-muted/20 p-4">
+    <div className="rounded-2xl border border-border/50 bg-muted/20 p-4">
       <div className="flex items-center gap-3">
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
           {icon}
         </span>
         <div>
-          <p className="text-sm text-muted-foreground">{label}</p>
-          <p className="text-xl font-semibold">{value.toLocaleString()}</p>
+          <p className="text-xs text-muted-foreground sm:text-sm">{label}</p>
+          <p className="text-lg font-semibold leading-tight sm:text-xl">{value.toLocaleString()}</p>
         </div>
       </div>
     </div>

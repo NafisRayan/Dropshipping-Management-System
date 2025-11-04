@@ -46,7 +46,7 @@ type SummaryGridProps = {
 
 export function SummaryGrid({ summary }: SummaryGridProps) {
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
       {metrics.map((metric) => {
         const Icon = metric.icon;
         const value = summary[metric.key];
@@ -62,30 +62,37 @@ export function SummaryGrid({ summary }: SummaryGridProps) {
           : numberFormatter.format(value);
 
         return (
-          <Card key={metric.key} className="border-border/60 bg-card/80 shadow-lg backdrop-blur">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between gap-3">
-                <CardTitle className="text-base font-semibold text-foreground/90">
+          <Card
+            key={metric.key}
+            className="border-border/60 bg-card/80 shadow-lg backdrop-blur transition-transform duration-200 hover:-translate-y-0.5"
+          >
+            <CardHeader className="pb-3 sm:pb-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <CardTitle className="text-sm font-semibold text-foreground/90 sm:text-base">
                   {metric.label}
                 </CardTitle>
                 <Badge variant="secondary" className="rounded-full bg-primary/10 text-primary">
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                 </Badge>
               </div>
-              <CardDescription className="text-xs text-muted-foreground">
+              <CardDescription className="text-[11px] text-muted-foreground sm:text-xs">
                 Compared to last month
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="text-3xl font-bold tracking-tight">{formattedValue}</div>
+            <CardContent className="space-y-3 sm:space-y-4">
+              <div className="text-2xl font-bold tracking-tight sm:text-3xl">{formattedValue}</div>
               <Separator className="bg-border/60" />
-              <div className="flex items-center gap-2 text-sm">
+              <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
                 <Badge
                   className={`rounded-full px-2 py-1 font-medium ${
                     isPositive ? "bg-emerald-50 text-emerald-600" : "bg-rose-50 text-rose-600"
                   }`}
                 >
-                  {isPositive ? <ArrowUpRight className="mr-1 h-3.5 w-3.5" /> : <ArrowDownRight className="mr-1 h-3.5 w-3.5" />}
+                  {isPositive ? (
+                    <ArrowUpRight className="mr-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                  ) : (
+                    <ArrowDownRight className="mr-1 h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                  )}
                   {Math.abs(change)}%
                 </Badge>
                 <span className="text-muted-foreground">vs previous period</span>
